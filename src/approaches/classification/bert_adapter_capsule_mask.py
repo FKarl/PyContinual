@@ -21,7 +21,7 @@ import utils
 sys.path.append("./approaches/base/")
 from bert_adapter_mask_base import Appr as ApprBase
 from my_optimization import BertAdam
-
+import numpy as np
 
 class Appr(ApprBase):
 
@@ -52,6 +52,8 @@ class Appr(ApprBase):
         best_loss=np.inf
         best_model=utils.get_model(self.model)
 
+        epoch_runtimes = []
+
         # Loop epochs
         for e in range(int(self.args.num_train_epochs)):
             # Train
@@ -59,6 +61,10 @@ class Appr(ApprBase):
             iter_bar = tqdm(train, desc='Train Iter (loss=X.XXX)')
             global_step=self.train_epoch(t,train,iter_bar, optimizer,t_total,global_step)
             clock1=time.time()
+
+            runtime = clock1 - clock0
+            epoch_runtimes.append(runtime)
+            print('Epoch runtime: ', runtime)
 
             train_loss,train_acc,train_f1_macro=self.eval(t,train)
             clock2=time.time()
@@ -83,6 +89,10 @@ class Appr(ApprBase):
             # break
         # Restore best
         utils.set_model_(self.model,best_model)
+
+        # calc avg runtime
+        avg_runtime = np.mean(epoch_runtimes)
+        print('Average runtime: ', avg_runtime)
 
         # Activations mask
         # task=torch.autograd.Variable(torch.LongTensor([t]).cuda(),volatile=False)
@@ -202,4 +212,3 @@ class Appr(ApprBase):
                 # break
 
         return total_loss/total_num,total_acc/total_num,f1
-
