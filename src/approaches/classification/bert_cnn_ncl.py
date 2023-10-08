@@ -29,6 +29,8 @@ class Appr(ApprBase):
         patience=self.lr_patience
         self.optimizer=self._get_optimizer(lr)
 
+        epoch_runtimes = []
+
         # Loop epochs
         for e in range(self.nepochs):
             # Train
@@ -40,6 +42,12 @@ class Appr(ApprBase):
             clock2=time.time()
             print('| Epoch {:3d}, time={:5.1f}ms/{:5.1f}ms | Train: loss={:.3f}, acc={:5.1f}% |'.format(e+1,
                 1000*self.train_batch_size*(clock1-clock0)/len(train),1000*self.train_batch_size*(clock2-clock1)/len(train),train_loss,100*train_acc),end='')
+
+            runtime = clock1 - clock0
+            epoch_runtimes.append(runtime)
+            print('Epoch runtime: ', runtime)
+
+
             # Valid
             valid_loss,valid_acc,valid_f1_macro=self.eval(t,valid)
             print(' Valid: loss={:.3f}, acc={:5.1f}% |'.format(valid_loss,100*valid_acc),end='')
@@ -60,6 +68,12 @@ class Appr(ApprBase):
                     patience=self.lr_patience
                     self.optimizer=self._get_optimizer(lr)
             print()
+
+        # calc avg runtime
+        avg_runtime = np.mean(epoch_runtimes)
+        print('Average runtime: ', avg_runtime)
+        std_runtime = np.std(epoch_runtimes)
+        print('Std runtime: ', std_runtime)
 
         # Restore best
         utils.set_model_(self.model,best_model)
