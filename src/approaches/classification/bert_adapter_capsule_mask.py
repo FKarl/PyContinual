@@ -9,7 +9,6 @@ import json
 import argparse
 import random
 from tqdm import tqdm, trange
-import numpy as np
 import torch
 from torch.utils.data import RandomSampler
 from torch.utils.data.distributed import DistributedSampler
@@ -93,6 +92,8 @@ class Appr(ApprBase):
         # calc avg runtime
         avg_runtime = np.mean(epoch_runtimes)
         print('Average runtime: ', avg_runtime)
+        std_runtime = np.std(epoch_runtimes)
+        print('Std runtime: ', std_runtime)
 
         # Activations mask
         # task=torch.autograd.Variable(torch.LongTensor([t]).cuda(),volatile=False)
