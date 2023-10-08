@@ -29,6 +29,9 @@ class Appr(ApprBase):
         self.optimizer = self._get_optimizer_owm(lr)
         nepochs = self.nepochs
         test_max = 0
+
+        epoch_runtimes = []
+
         # Loop epochs
         try:
             for e in range(nepochs):
@@ -38,6 +41,10 @@ class Appr(ApprBase):
 
                 self.train_epoch(t,train, iter_bar, cur_epoch=e, nepoch=nepochs)
                 clock1=time.time()
+
+                runtime = clock1 - clock0
+                epoch_runtimes.append(runtime)
+                print('Epoch runtime: ', runtime)
 
                 train_loss, train_acc,train_f1_macro = self.eval(t,train)
 
@@ -72,6 +79,12 @@ class Appr(ApprBase):
 
         except KeyboardInterrupt:
             print()
+
+        # calc avg runtime
+        avg_runtime = np.mean(epoch_runtimes)
+        print('Average runtime: ', avg_runtime)
+        std_runtime = np.std(epoch_runtimes)
+        print('Std runtime: ', std_runtime)
 
         # Restore best validation model
         utils.set_model_(self.model, best_model)
