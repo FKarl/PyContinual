@@ -95,9 +95,13 @@ class Appr(ApprBase):
             pooled_rep = output_dict['normalized_pooled_rep']
             if 'dil' in self.args.scenario:
                 output=output_dict['y']
+                # todo delete
+                print('\n\n\n\n\n\noutput: ', output)
             elif 'til' in self.args.scenario:
                 outputs=output_dict['y']
                 output = outputs[t]
+                # todo delete
+                print('\n\n\n\n\n\noutput: ', output)
 
             loss=self.ce(output,targets)
 
