@@ -96,12 +96,12 @@ class Appr(ApprBase):
             if 'dil' in self.args.scenario:
                 output=output_dict['y']
                 # todo delete
-                print('\n\n\n\n\n\noutput: ', output)
+                print('\n\n\n\n\n\noutput: ', output.shape)
             elif 'til' in self.args.scenario:
                 outputs=output_dict['y']
                 output = outputs[t]
                 # todo delete
-                print('\n\n\n\n\n\noutput: ', output)
+                print('\n\n\n\n\n\noutput: ', output.shape)
 
             loss=self.ce(output,targets)
 
