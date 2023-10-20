@@ -98,10 +98,9 @@ class Appr(ApprBase):
                 # todo delete
                 print('\n\n\n\n\n\noutput: ', output.shape)
             elif 'til' in self.args.scenario:
-                outputs=output_dict['y']
-                output = outputs[t]
-                # todo delete
+                outputs=output_dict['y']# todo delete
                 print('\n\n\n\n\n\noutput: ', output.shape)
+                output = outputs[t]
 
             loss=self.ce(output,targets)
 
