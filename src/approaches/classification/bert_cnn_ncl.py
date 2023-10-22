@@ -97,7 +97,6 @@ class Appr(ApprBase):
                 output=output_dict['y']
             elif 'til' in self.args.scenario:
                 outputs=output_dict['y']
-                print(outputs)
                 output = outputs[t]
 
             loss=self.ce(output,targets)
