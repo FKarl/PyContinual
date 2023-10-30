@@ -46,6 +46,12 @@ elif args.task == 'newsgroup': #20newsgroup
         from dataloaders.newsgroup import w2v as dataloader
     elif args.backbone in bert_backbone:  # all others
         from dataloaders.newsgroup import bert as dataloader
+elif args.task == 'glue': #20newsgroup
+    if args.backbone=='w2v':
+        # error not implemented
+        raise NotImplementedError
+    elif args.backbone in bert_backbone:  # all others
+        from dataloaders.glue import bert as dataloader
 
 # ----------------------------------------------------------------------
 # Image Datasets.
