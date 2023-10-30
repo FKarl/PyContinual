@@ -11,7 +11,7 @@ args = set_args()
 bert_backbone = ['bert','bert_adapter','bert_frozen']
 w2v_backbone = ['w2v','w2v_as']
 
-language_dataset = ['asc','dsc','ssc','nli','newsgroup']
+language_dataset = ['asc','dsc','ssc','nli','newsgroup','glue']
 image_dataset = ['celeba','femnist','vlcs','cifar10','mnist','fashionmnist','cifar100']
 
 
