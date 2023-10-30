@@ -146,12 +146,13 @@ def get(logger,args):
     for t in range(len(classes)): # == args.ntasks
         dataset = random_sep[t]
         print('dataset: ',dataset)
+        
+        data[t] = {}
+        data[t]['name'] = dataset_name + '-' + dataset
+
         # convert to id
         dataset = task_map_inv[dataset]
 
-
-        data[t] = {}
-        data[t]['name'] = dataset_name + '-' + dataset
         data[t]['ncla'] = 2 # binary classification 0/1
 
         label_list = [0,1]
