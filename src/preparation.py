@@ -78,7 +78,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 n_gpu = torch.cuda.device_count()
 
 classification_tasks = ['asc', 'dsc', 'nli', 'ssc', 'newsgroup',
-                        'celeba', 'femnist', 'cifar10', 'mnist', 'fashionmnist', 'cifar100','vlcs']
+                        'celeba', 'femnist', 'cifar10', 'mnist', 'fashionmnist', 'cifar100','vlcs','glue']
 extraction_tasks = ['ner', 'ae']
 
 

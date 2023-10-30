@@ -29,6 +29,13 @@ def load():
         args.nepochs = 100
         args.nclasses = 2
 
+    if args.task == 'glue': #aspect sentiment classication
+        args.ntasks = 4 # TODO ?
+        args.class_per_task = 2
+        args.num_train_epochs = 10
+        args.nepochs = 100
+        args.nclasses = 2
+
 
 
     if args.task == 'celeba':
