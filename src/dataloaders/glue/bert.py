@@ -68,10 +68,10 @@ def get(logger,args):
             nn=(c_id//class_per_task) #which task_id this class belongs to
 
             if nn not in examples[s]: examples[s][nn] = []
-            print(c_data)
             for c_dat in c_data:
-                print(c_dat)
-                text= c_dat['text']
+                # text= c_dat['text']
+                # TODO check if correct
+                text= c_dat['sentence1'] + ' [SEP] ' + c_dat['sentence2'] + ' [SEP]'
                 label = c_id%class_per_task
                 examples[s][nn].append((text,label))
 
