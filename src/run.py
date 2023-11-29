@@ -295,8 +295,8 @@ for t, ncla in taskcla:
 
             # Save
             print('Save at ' + args.output)
-            np.savetxt(args.output + "_id-" + args.idrandom + '_progressive.acc', acc, '%.4f', delimiter='\t')
-            np.savetxt(args.output + "_id-" + args.idrandom + '_progressive.f1_macro', f1_macro, '%.4f', delimiter='\t')
+            np.savetxt(args.output + "_id-" + str(args.idrandom) + '_progressive.acc', acc, '%.4f', delimiter='\t')
+            np.savetxt(args.output + "_id-" + str(args.idrandom) + '_progressive.f1_macro', f1_macro, '%.4f', delimiter='\t')
 
             # Done
             print('*' * 100)
