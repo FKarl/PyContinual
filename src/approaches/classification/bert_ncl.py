@@ -53,6 +53,8 @@ class Appr(ApprBase):
         best_loss=np.inf
         best_model=utils.get_model(self.model)
 
+        epoch_runtimes = []
+
         # Loop epochs
         for e in range(int(self.args.num_train_epochs)):
             # Train
@@ -63,6 +65,11 @@ class Appr(ApprBase):
 
             train_loss,train_acc,train_f1_macro=self.eval(t,train)
             clock2=time.time()
+
+            runtime = clock1 - clock0
+            epoch_runtimes.append(runtime)
+            print('Epoch runtime: ', runtime)
+
             # print('time: ',float((clock1-clock0)*10*25))
             print('| Epoch {:3d}, time={:5.1f}ms/{:5.1f}ms | Train: loss={:.3f}, acc={:5.1f}% |'.format(e+1,
                 1000*self.train_batch_size*(clock1-clock0)/len(train),1000*self.train_batch_size*(clock2-clock1)/len(train),train_loss,100*train_acc),end='')
@@ -79,6 +86,12 @@ class Appr(ApprBase):
             # break
         # Restore best
         utils.set_model_(self.model,best_model)
+
+        # calc avg runtime
+        avg_runtime = np.mean(epoch_runtimes)
+        print('Average runtime: ', avg_runtime)
+        std_runtime = np.std(epoch_runtimes)
+        print('Std runtime: ', std_runtime)
 
         return
 

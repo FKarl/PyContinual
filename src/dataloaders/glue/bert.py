@@ -121,7 +121,6 @@ def get(logger,args):
             nn=c_id #which task_id this class belongs to
             if nn not in examples[s]: examples[s][nn] = []
             for c_dat in c_data:
-                # TODO check if correct
                 # text= c_dat['text']
                 task_name = task_map[c_id]
                 if task_name == 'sst2':
