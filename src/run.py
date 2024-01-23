@@ -103,7 +103,7 @@ if args.print_report:
 # ----------------------------------------------------------------------
 # Start Training.
 # ----------------------------------------------------------------------
-
+runtimes = []
 for t, ncla in taskcla:
 
     if args.eval_each_step:
@@ -168,7 +168,7 @@ for t, ncla in taskcla:
 
     logger.info('Start Training and Set the clock')
     tstart = time.time()
-    runtimes = []
+
 
 
     if not args.eval_only:
@@ -180,7 +180,7 @@ for t, ncla in taskcla:
             print('train')
             avg_runtime_per_epoch =  appr.train(task, train_dataloader, valid_dataloader, num_train_steps, train, valid)
         runtimes.append(avg_runtime_per_epoch)
-        print(f'avg_runtime_per_epoch: {avg_runtime_per_epoch}, standard deviation: {np.std(runtimes)}')
+
 
     print('-' * 100)
 
@@ -331,5 +331,7 @@ for t, ncla in taskcla:
                     for j in range(acc.shape[1]):
                         file.writelines(str(acc[j][j]) + '\n')
                         f1_file.writelines(str(f1_macro[j][j]) + '\n')
+
+print(f'avg_runtime_per_epoch: {np.average(runtimes)}, standard deviation: {np.std(runtimes)}')
 
 ########################################################################################################################
