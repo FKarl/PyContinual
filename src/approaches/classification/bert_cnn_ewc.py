@@ -96,7 +96,7 @@ class Appr(ApprBase):
                 self.fisher[n]=(self.fisher[n]+fisher_old[n]*t)/(t+1)       # Checked: it is better than the other option
                 #self.fisher[n]=0.5*(self.fisher[n]+fisher_old[n])
 
-        return
+        return avg_runtime
 
     def train_epoch(self,t,data,iter_bar):
         self.model.train()

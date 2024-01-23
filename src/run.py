@@ -168,15 +168,19 @@ for t, ncla in taskcla:
 
     logger.info('Start Training and Set the clock')
     tstart = time.time()
+    runtimes = []
+
 
     if not args.eval_only:
         if args.task in extraction_tasks:
             label_list = data[t]['label_list']
-            appr.train(task, train_dataloader, valid_dataloader, num_train_steps, train, valid, label_list)
+            avg_runtime_per_epoch = appr.train(task, train_dataloader, valid_dataloader, num_train_steps, train, valid, label_list)
         else:
             # Train
             print('train')
-            appr.train(task, train_dataloader, valid_dataloader, num_train_steps, train, valid)
+            avg_runtime_per_epoch =  appr.train(task, train_dataloader, valid_dataloader, num_train_steps, train, valid)
+        runtimes.append(avg_runtime_per_epoch)
+        print(f'avg_runtime_per_epoch: {avg_runtime_per_epoch}, standard deviation: {np.std(runtimes)}')
 
     print('-' * 100)
 

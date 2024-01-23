@@ -109,7 +109,7 @@ class Appr(ApprBase):
             logits = cur_task_output.data
         )
 
-        return
+        return avg_runtime
 
     def train_epoch(self,t,data,iter_bar):
         self.model.train()

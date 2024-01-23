@@ -115,7 +115,7 @@ class Appr(ApprBase):
                 self.mask_back[n]=1-vals
 
 
-        return
+        return avg_runtime
 
     def train_epoch(self,t,data,iter_bar,optimizer,t_total,global_step):
         self.model.train()

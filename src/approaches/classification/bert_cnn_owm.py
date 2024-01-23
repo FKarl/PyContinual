@@ -88,7 +88,7 @@ class Appr(ApprBase):
 
         # Restore best validation model
         utils.set_model_(self.model, best_model)
-        return
+        return avg_runtime
 
     def train_epoch(self, t,data,iter_bar, cur_epoch=0, nepoch=0):
         self.model.train()
