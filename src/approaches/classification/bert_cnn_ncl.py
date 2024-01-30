@@ -78,7 +78,7 @@ class Appr(ApprBase):
         # Restore best
         utils.set_model_(self.model,best_model)
         print('saved: ') #TODO: debug, why so well on 20newsgroup
-        return
+        return avg_runtime
 
 
 

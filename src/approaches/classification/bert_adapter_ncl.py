@@ -95,7 +95,7 @@ class Appr(ApprBase):
         std_runtime = np.std(epoch_runtimes)
         print('Std runtime: ', std_runtime)
 
-        return
+        return avg_runtime
 
     def train_epoch(self,t,data,iter_bar,optimizer,t_total,global_step):
         self.model.train()
